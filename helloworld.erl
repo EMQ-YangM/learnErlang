@@ -30,6 +30,9 @@ start() ->
     io:fwrite("~p~n", [Str1]),
     TrueFun = fun(_) -> true end,
     io:fwrite("~p~n", [lists:all(TrueFun, [true,true])]),
+    {ok, File} = file:open("NewFile.txt", [read]),
+    Txt = file:read(File,1024 * 1024),
+    io:fwrite("~p~n", [Txt]),
     io:fwrite("finish\n").
 
 for(0, _) ->
