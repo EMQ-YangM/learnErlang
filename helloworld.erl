@@ -15,4 +15,11 @@ while([_ | T], Acc) ->
 
 start() ->
     X = [1, 2, 3, 4],
-    while(X).
+    while(X),
+    for(5, atom).
+
+for(0, _) ->
+    [];
+for(N, Term) when n > 0 ->
+    io:fwrite("atom"),
+    [Term | for(N - 1, Term)].
