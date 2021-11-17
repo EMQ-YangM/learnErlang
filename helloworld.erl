@@ -19,6 +19,9 @@ while([_ | T], Acc) ->
     io:fwrite("~w~n", [Acc]),
     while(T, Acc + 1).
 
+call(Arg1, Arg2) ->
+    io:format("~p ~p~n", [Arg1, Arg2]).
+
 start() ->
     X = [1, 2, 3, 4],
     while(X),
@@ -56,6 +59,12 @@ start() ->
     io:fwrite("~w~n", [time()]),
     io:fwrite("~w~n", [tuple_to_list({1, 2, 3})]),
     io:fwrite("~w~n", [<<"hello">>]),
+    Pid = spawn(?MODULE, call, ["hello", "process"]),
+    io:fwrite("~p", [Pid]),
+    {ok, Socket} = gen_udp:open(8789),
+    io:fwrite("~p", [Socket]),
+    ok = gen_udp:send(Socket, "localhost", 8789, "Hello"),
+    res = gen_udp:recv(Socket, 20),
     io:fwrite("finish\n").
 
 for(0, _) ->
