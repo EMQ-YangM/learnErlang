@@ -33,6 +33,14 @@ start() ->
     {ok, File} = file:open("NewFile.txt", [read]),
     Txt = file:read(File,1024 * 1024),
     io:fwrite("~p~n", [Txt]),
+    io:fwrite(atom1),
+    io:fwrite("~n"),
+    io:fwrite(atom2),
+    io:fwrite("~n"),
+    io:fwrite(atom3),
+    io:fwrite("~n"),
+    io:fwrite(atom4),
+    io:fwrite("~n"),
     io:fwrite("finish\n").
 
 for(0, _) ->
