@@ -8,8 +8,8 @@
 -import(io, [fwrite/1]).
 
 start() ->
-    M1 = #{name=>john, age=>25},
-    io:fwrite("~w", [map_size(M1)]).
+    L = [10,20,30],
+    io:fwrite("~w", [length(L)]).
 
 %% shell
 %% b() ----------------
