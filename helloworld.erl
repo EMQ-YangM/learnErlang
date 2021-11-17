@@ -143,3 +143,16 @@ lookup(N) ->
         2 ->
             exit(a)
     end.
+
+display(N) when N > 10 ->
+    io:fwrite("greater then 10");
+display(N) when n < 10 ->
+    io:fwrite("less than 10").
+
+tmpFun1(VA) ->
+    case VA of
+        {A} when A > 10 ->
+            io:fwrite("nice");
+        _ ->
+            io:fwrite("finish")
+    end.
