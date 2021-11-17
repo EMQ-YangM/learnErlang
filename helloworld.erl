@@ -17,10 +17,10 @@ start() ->
     X = [1, 2, 3, 4],
     while(X),
     for(5, atom),
-    Fn = fun() ->
-       io:fwrite("some function\n") end,
+    Fn = fun() -> io:fwrite("some function\n") end,
     Fn(),
-    add(10,20).
+    add1(5),
+    add(10, 20).
 
 for(0, _) ->
     [];
@@ -28,6 +28,9 @@ for(N, Term) when n > 0 ->
     io:fwrite("atom"),
     [Term | for(N - 1, Term)].
 
-add(X,Y) ->
+add(X, Y) ->
     Z = X + Y,
     io:fwrite("~w~n", [Z]).
+
+add1(X) when X > 3 ->
+    io:fwrite("~w~n", [X]).
