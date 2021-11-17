@@ -55,6 +55,7 @@ start() ->
     io:fwrite("~w~n", [?macrol(1, 2)]),
     io:fwrite("~w~n", [time()]),
     io:fwrite("~w~n", [tuple_to_list({1, 2, 3})]),
+    io:fwrite("~w~n", [<<"hello">>]),
     io:fwrite("finish\n").
 
 for(0, _) ->
