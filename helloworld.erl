@@ -4,14 +4,15 @@
 %% export ........
 -export([start/0]).
 
-%% import .......
--import(io, [fwrite/1]).
+while(L) ->
+    while(L, 0).
+
+while([], Acc) ->
+    Acc;
+while([_ | T], Acc) ->
+    io:fwrite("~w~n", [Acc]),
+    while(T, Acc + 1).
 
 start() ->
-    X = 40.00,
-    Y = 50.00,
-    io:fwrite("~f~n", [X]),
-    io:fwrite("~e", [Y]).
-
-%% shell
-%% b() ----------------
+    X = [1, 2, 3, 4],
+    while(X).
