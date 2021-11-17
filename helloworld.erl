@@ -10,6 +10,8 @@
 
 -record(person, {name = "", personId}).
 -record(employee, {person, employeeId}).
+-define(a, 1).
+-define(macrol(X,Y), {X+Y}).
 
 while(L) ->
     while(L, 0).
@@ -51,7 +53,9 @@ start() ->
     io:fwrite("~w", [E]),
     io:fwrite("~w~n", [demo1()]),
     %% io:fwrite("~w~n", [demo2()]),
-    io:fwrite("~w~n", [demo3()]),
+    %% io:fwrite("~w~n", [demo3()]),
+    io:fwrite("~w~n", [?a]),
+    io:fwrite("~w~n", [?macrol(1,2)]),
     io:fwrite("finish\n").
 
 for(0, _) ->
