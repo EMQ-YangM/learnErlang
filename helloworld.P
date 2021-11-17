@@ -1,14 +1,20 @@
-%% ........
+-file("helloworld.erl", 1).
+
 -module(helloworld).
 
 -author("aa").
 
 -version("1.2").
 
-%% export ........
 -export([start/0]).
 
--include("user.hrl").
+-file("user.hrl", 1).
+
+-record(person,{name = "", personId}).
+
+-record(employee,{person, employeeId}).
+
+-file("helloworld.erl", 11).
 
 while(L) ->
     while(L, 0).
@@ -23,14 +29,20 @@ start() ->
     X = [1, 2, 3, 4],
     while(X),
     for(5, atom),
-    Fn = fun() -> io:fwrite("some function\n") end,
+    Fn =
+        fun() ->
+               io:fwrite("some function\n")
+        end,
     Fn(),
     add1(5),
     add(11, 21),
     fac(10),
     Str1 = "this is a string",
     io:fwrite("~p~n", [Str1]),
-    TrueFun = fun(_) -> true end,
+    TrueFun =
+        fun(_) ->
+               true
+        end,
     io:fwrite("~p~n", [lists:all(TrueFun, [true, true])]),
     {ok, File} = file:open("NewFile.txt", [read]),
     Txt = file:read(File, 1024 * 1024),
@@ -49,10 +61,8 @@ start() ->
     io:fwrite("~w, ~w, ~w ~n", [P, P#person.personId, P1#person.name]),
     io:fwrite("~w", [E]),
     io:fwrite("~w~n", [demo1()]),
-    %% io:fwrite("~w~n", [demo2()]),
-    %% io:fwrite("~w~n", [demo3()]),
-    io:fwrite("~w~n", [?a]),
-    io:fwrite("~w~n", [?macrol(1, 2)]),
+    io:fwrite("~w~n", [1]),
+    io:fwrite("~w~n", [{1 + 2}]),
     io:fwrite("finish\n").
 
 for(0, _) ->
@@ -107,14 +117,14 @@ generate_exception(3) ->
 generate_exception(4) ->
     {'Exit', a};
 generate_exception(5) ->
-    erlang:error(a).
+    error(a).
 
 catcher(N) ->
     try generate_exception(N) of
         Val ->
             {N, normal, Val}
     catch
-        X ->
+        throw:X ->
             {N, caught, thrown, X};
         exit:X ->
             {N, caught, exited, X};
@@ -123,10 +133,16 @@ catcher(N) ->
     end.
 
 demo1() ->
-    [catcher(I) || I <- [1, 2, 3, 4, 5]].
+    [ 
+     catcher(I) ||
+         I <- [1, 2, 3, 4, 5]
+    ].
 
 demo2() ->
-    [{I, catch generate_exception(I)} || I <- [1, 2, 3, 4, 5]].
+    [ 
+     {I, catch generate_exception(I)} ||
+         I <- [1, 2, 3, 4, 5]
+    ].
 
 demo3() ->
     try
@@ -143,3 +159,6 @@ lookup(N) ->
         2 ->
             exit(a)
     end.
+
+
+
