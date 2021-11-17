@@ -8,6 +8,9 @@
 %% export ........
 -export([start/0]).
 
+-record(person, {name = "", personId}).
+-record(employee, {person, employeeId}).
+
 while(L) ->
     while(L, 0).
 
@@ -29,9 +32,9 @@ start() ->
     Str1 = "this is a string",
     io:fwrite("~p~n", [Str1]),
     TrueFun = fun(_) -> true end,
-    io:fwrite("~p~n", [lists:all(TrueFun, [true,true])]),
+    io:fwrite("~p~n", [lists:all(TrueFun, [true, true])]),
     {ok, File} = file:open("NewFile.txt", [read]),
-    Txt = file:read(File,1024 * 1024),
+    Txt = file:read(File, 1024 * 1024),
     io:fwrite("~p~n", [Txt]),
     io:fwrite(atom1),
     io:fwrite("~n"),
@@ -41,6 +44,11 @@ start() ->
     io:fwrite("~n"),
     io:fwrite(atom4),
     io:fwrite("~n"),
+    P = #person{name = "John", personId = 1},
+    P1 = P#person{name = "Dan"},
+    E = #employee{person = P, employeeId = 2},
+    io:fwrite("~w, ~w, ~w ~n", [P, P#person.personId, P1#person.name]),
+    io:fwrite("~w", [E]),
     io:fwrite("finish\n").
 
 for(0, _) ->
