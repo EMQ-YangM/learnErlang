@@ -24,7 +24,9 @@ start() ->
     Fn = fun() -> io:fwrite("some function\n") end,
     Fn(),
     add1(5),
-    add(10, 20).
+    add(11, 21),
+    fac(10),
+    io:fwrite("finish\n").
 
 for(0, _) ->
     [];
@@ -38,3 +40,33 @@ add(X, Y) ->
 
 add1(X) when X > 3 ->
     io:fwrite("~w~n", [X]).
+
+fac(N) when N == 0 ->
+    1;
+fac(N) when n > 0 ->
+    io:fwrite("~w\n", [N]),
+    N * fac(N - 1).
+
+len([]) ->
+    0;
+len([_ | T]) ->
+    1 + len(T).
+
+tail_len(L) ->
+    tail_len(L, 0).
+
+tail_len([], Acc) ->
+    Acc;
+tail_len([_ | T], Acc) ->
+    tail_len(T, Acc + 1).
+
+duplicate(0, _) ->
+    [];
+duplicate(N, Term) when N > 0 ->
+    io:fwrite("~w, ~n", [Term]),
+    [Term | duplicate(N - 1, Term)].
+
+tail_reverse([], Acc) ->
+    Acc;
+tail_reverse([H | T], Acc) ->
+    tail_reverse(T, [H | Acc]).
