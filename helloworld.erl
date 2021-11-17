@@ -28,6 +28,8 @@ start() ->
     fac(10),
     Str1 = "this is a string",
     io:fwrite("~p~n", [Str1]),
+    TrueFun = fun(_) -> true end,
+    io:fwrite("~p~n", [lists:all(TrueFun, [true,true])]),
     io:fwrite("finish\n").
 
 for(0, _) ->
