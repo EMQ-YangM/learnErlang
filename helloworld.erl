@@ -26,6 +26,8 @@ start() ->
     add1(5),
     add(11, 21),
     fac(10),
+    Str1 = "this is a string",
+    io:fwrite("~p~n", [Str1]),
     io:fwrite("finish\n").
 
 for(0, _) ->
