@@ -8,9 +8,8 @@
 -import(io, [fwrite/1]).
 
 start() ->
-    Bin1 = <<10,20>>,
-    X = binary_to_list(Bin1),
-    io:fwrite("~w", [X]).
+    P = {john, 24, {june, 25}},
+    io:fwrite("~w", [tuple_size(P)]).
 
 %% shell
 %% b() ----------------
