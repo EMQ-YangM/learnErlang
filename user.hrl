@@ -1,0 +1,4 @@
+-record(person, {name = "", personId}).
+-record(employee, {person, employeeId}).
+-define(a, 1).
+-define(macrol(X,Y), {X+Y}).
