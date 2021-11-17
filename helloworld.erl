@@ -8,8 +8,10 @@
 -import(io, [fwrite/1]).
 
 start() ->
-    L = [10,20,30],
-    io:fwrite("~w", [length(L)]).
+    X = 40,
+    Y = 50,
+    Result = X + Y,
+    io:fwrite("~w", [Result]).
 
 %% shell
 %% b() ----------------
