@@ -49,6 +49,9 @@ start() ->
     E = #employee{person = P, employeeId = 2},
     io:fwrite("~w, ~w, ~w ~n", [P, P#person.personId, P1#person.name]),
     io:fwrite("~w", [E]),
+    io:fwrite("~w~n", [demo1()]),
+    %% io:fwrite("~w~n", [demo2()]),
+    io:fwrite("~w~n", [demo3()]),
     io:fwrite("finish\n").
 
 for(0, _) ->
@@ -93,3 +96,49 @@ tail_reverse([], Acc) ->
     Acc;
 tail_reverse([H | T], Acc) ->
     tail_reverse(T, [H | Acc]).
+
+generate_exception(1) ->
+    a;
+generate_exception(2) ->
+    throw(a);
+generate_exception(3) ->
+    exit(a);
+generate_exception(4) ->
+    {'Exit', a};
+generate_exception(5) ->
+    erlang:error(a).
+
+catcher(N) ->
+    try generate_exception(N) of
+        Val ->
+            {N, normal, Val}
+    catch
+        X ->
+            {N, caught, thrown, X};
+        exit:X ->
+            {N, caught, exited, X};
+        error:X ->
+            {N, caught, error, X}
+    end.
+
+demo1() ->
+    [catcher(I) || I <- [1, 2, 3, 4, 5]].
+
+demo2() ->
+    [{I, catch generate_exception(I)} || I <- [1, 2, 3, 4, 5]].
+
+demo3() ->
+    try
+        generate_exception(5)
+    catch
+        error:X ->
+            {X, erlang:get_stacktrace()}
+    end.
+
+lookup(N) ->
+    case N of
+        1 ->
+            {'EXIT', a};
+        2 ->
+            exit(a)
+    end.
