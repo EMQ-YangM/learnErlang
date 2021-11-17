@@ -1,6 +1,10 @@
 %% ........
 -module(helloworld).
 
+-author("aa").
+
+-version("1.2").
+
 %% export ........
 -export([start/0]).
 
