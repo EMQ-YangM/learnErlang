@@ -168,3 +168,31 @@ tmpFun1(VA) ->
         _ ->
             io:fwrite("finish")
     end.
+
+server(Message) ->
+    io:fwrite("~p", [Message]).
+
+start1() ->
+    Pid = spawn(fun() -> server("Hello") end),
+    Pid ! {hello}.
+
+loop() ->
+    receive
+        {rectangle, Width, Ht} ->
+            io:fwrite("Area of rectangle is ~p~n", [Width * Ht]),
+            loop;
+        {circle, R} ->
+            io:fwrite("Area of circle is ~p~n", [3.14159 * R * R]),
+            loop();
+        Other ->
+            io:fwrite("Unkonwn"),
+            loop()
+    end.
+
+max(N) ->
+    Max = erlang:system_info(process_limit),
+    io:format("Maxium allowed processes:~p~n", [Max]),
+    statistics(runtime),
+    statistics(wall_clock),
+    %% L = for(1, N, fun() -> spwan(fun() -> wait()end)end),
+    1.
