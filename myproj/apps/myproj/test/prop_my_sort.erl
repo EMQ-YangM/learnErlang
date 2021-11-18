@@ -31,5 +31,35 @@ ordered([_]) ->
 ordered([A, B | T]) ->
     A =< B andalso ordered([B | T]).
 
+%% prop_same_length() ->
+%%     ?FORALL(L, list(integer()), length(L) =:= length(sort(L))).
+
+prop_same_length_conditional_check() ->
+    ?FORALL(L, list(integer()), ?IMPLIES(no_duplicates(L), length(L) =:= length(sort(L)))).
+
+no_duplicates([]) ->
+    true;
+no_duplicates([A | T]) ->
+    not lists:member(A, T) andalso no_duplicates(T).
+
+list_no_dupls(T) ->
+    ?LET(L, list(T), remove_duplicates(L)).
+
+remove_duplicates([]) ->
+    [];
+remove_duplicates([A | T]) ->
+    case lists:member(A, T) of
+        true ->
+            remove_duplicates(T);
+        false ->
+            [A | remove_duplicates(T)]
+    end.
+
+prop_same_length_no_dupls() ->
+    ?FORALL(L, list_no_dupls(integer()), length(L) =:= length(sort(L))).
+
+prop_equiv_usort() ->
+    ?FORALL(L, list(), sort(L) =:= lists:usort(L)).
+
 prop_same_length() ->
-    ?FORALL(L, list(integer()), length(L) =:= length(sort(L))).
+    ?FORALL(L, list(), length(L) =:= length(sort(L))).
