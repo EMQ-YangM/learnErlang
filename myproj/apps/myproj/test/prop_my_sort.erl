@@ -61,5 +61,5 @@ prop_same_length_no_dupls() ->
 prop_equiv_usort() ->
     ?FORALL(L, list(), sort(L) =:= lists:usort(L)).
 
-prop_same_length() ->
-    ?FORALL(L, list(), length(L) =:= length(sort(L))).
+% prop_same_length() ->
+%     ?FORALL(L, list(), length(L) =:= length(sort(L))).
