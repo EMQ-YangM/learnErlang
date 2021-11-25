@@ -1,0 +1,16 @@
+* Key words for use in RFCs to Indicate Requirement Levels
+** MUST                  10
+** NUST NOT
+** REQUIRED
+** SHALL
+** SHALL NOT
+** SHOULD
+** SHOULD NOT
+** RECOMMENDED
+** MAY
+** OPTIONAL
+** 问题
+1. qos1 不保证消息顺序？
+2. emqx_resource
+   SAFE_CALL
+3. how to impl hook
