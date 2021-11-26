@@ -10,7 +10,21 @@
 ** MAY
 ** OPTIONAL
 ** 问题
-1. qos1 不保证消息顺序？
-2. emqx_resource
-   SAFE_CALL
-3. how to impl hook
+1. emqx how to impl hook
+https://docs.emqx.io/en/enterprise/v4.3/advanced/hooks.html#definition
+? 优先级和顺序冲突
+? 通知机制如何？
+? 这应该不是希望非开发者使用的东西
+
+2. token bucket
+   
+3. inflight window, mqueue
+
+Qos1  可能这里是tcp保证的性质 ???
+
+#1  [4,3,2,1 || ]       ----->   []
+#2  [4,3     || 2, 1]   ----->   [1, 2]
+#3  [4       || 3, 2]   ----->   [1, 2, 3]
+#4  [4       || 3, 2]   ----->   [1, 2, 3, 2, 3]
+#5  [        || 4]      ----->   [1, 2, 3, 2, 3, 4]
+#6  [        || ]       ----->   [1, 2, 3, 2, 3, 4]
